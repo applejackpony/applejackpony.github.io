@@ -75,9 +75,9 @@
             if (password === 'bluefuton') {
                 document.getElementById('login-form').classList.add('hidden');
                 document.getElementById('message-board').style.display = 'block';
-                history.pushState({}, '', 'applejackpony.com'); // Update the URL to remove the '?'
+                history.pushState({}, '', 'applejackpony.com'); 
             } else {
-                alert('Incorrect password. Please try again.');
+                alert('Incorrect password.');
             }
         }
 
