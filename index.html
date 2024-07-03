@@ -14,7 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: orange; 
         }
         img {
             max-width: 100%;
@@ -77,7 +77,7 @@
                 document.getElementById('login-form').classList.add('hidden');
                 document.getElementById('message-board').style.display = 'block';
             } else {
-                alert('Incorrect password. Please try again.');
+                alert('Incorrect password.');
             }
         }
 
@@ -93,13 +93,20 @@
                 document.getElementById('message-content').value = '';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('password').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    checkPassword(e);
+                }
+            });
+        });
     </script>
 </head>
 <body>
     <img src="applejackwalking.gif" alt="Applejack" id="applejack-img">
     <form id="login-form" onsubmit="checkPassword(event)">
         <input type="password" id="password" placeholder="">
-        <button type="submit">Submit</button>
     </form>
 
     <div id="message-board" class="message-board">
