@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #f0f0f0;
         }
         img {
             max-width: 100%;
@@ -27,12 +27,88 @@
             padding: 10px;
             font-size: 16px;
         }
+        .hidden {
+            display: none;
+        }
+        .message-board {
+            display: none;
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .message-board h1 {
+            text-align: center;
+        }
+        .message-board form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .message-board textarea {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .message-board button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .message-board .messages {
+            margin-top: 20px;
+        }
+        .message-board .message {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
     </style>
+    <script>
+        function checkPassword(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            var password = document.getElementById('password').value;
+            if (password === 'bluefuton') {
+                document.getElementById('login-form').classList.add('hidden');
+                document.getElementById('message-board').style.display = 'block';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+
+        function postMessage(event) {
+            event.preventDefault();
+            var messageContent = document.getElementById('message-content').value;
+            if (messageContent) {
+                var messageBoard = document.getElementById('messages');
+                var newMessage = document.createElement('div');
+                newMessage.className = 'message';
+                newMessage.textContent = messageContent;
+                messageBoard.appendChild(newMessage);
+                document.getElementById('message-content').value = '';
+            }
+        }
+    </script>
 </head>
 <body>
-    <img src="applejackwalking.gif" alt="Applejack">
-    <form>
-        <input type="password" placeholder="">
+    <img src="applejackwalking.gif" alt="Applejack" id="applejack-img">
+    <form id="login-form" onsubmit="checkPassword(event)">
+        <input type="password" id="password" placeholder="">
+        <button type="submit">Submit</button>
     </form>
+
+    <div id="message-board" class="message-board">
+        <h1>Message Board</h1>
+        <form onsubmit="postMessage(event)">
+            <textarea id="message-content" placeholder="Enter message"></textarea>
+            <button type="submit">Post Message</button>
+        </form>
+        <div id="messages" class="messages"></div>
+    </div>
 </body>
 </html>
